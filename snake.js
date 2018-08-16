@@ -31,6 +31,7 @@ setApple();
 
 function game() {
     console.log(sHeadX, sHeadY + " / " + VelostityX, VelostityY);
+    // matrix is inversed [x = y]
     sHeadY += VelostityX;
     sHeadX += VelostityY;
 
@@ -97,18 +98,17 @@ function GAMEOVER(){
 }
 
 function keyPush(evt) {
-    //console.log(evt);
     switch (evt.keyCode) {
-        case 37: // top
+        case 37: 
             VelostityX = -1; VelostityY = 0;
             break;
-        case 38: // left
+        case 38: 
             VelostityX = 0; VelostityY = -1;
             break;
-        case 39: // down
+        case 39: 
             VelostityX = 1; VelostityY = 0;
             break;
-        case 40: // right
+        case 40: 
             VelostityX = 0; VelostityY = 1;
             break;
     }
