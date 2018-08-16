@@ -52,6 +52,7 @@ function game() {
 
     clearField();
     drawSnake();
+    drawApple();
 
     snake.push({x:sHeadX,y:sHeadY});
     
@@ -80,6 +81,10 @@ function drawSnake() {
             GAMEOVER();
         }
     }
+}
+
+function drawApple(){
+    matrix[appleX][appleY].classList.add("appleCell");
 }
 
 function GAMEOVER(){
@@ -120,14 +125,5 @@ function setApple() {
     appleX = getRandomInt(SIZE);
     appleY = getRandomInt(SIZE);
 
-    for (cell in snake) {
-        if (appleX == cell.x && appleY == cell.y) {
-            setApple();
-        }
-        else {
-            matrix[appleX][appleY].classList.remove("cell");
-            matrix[appleX][appleY].classList.add("appleCell");
-            return;
-        }
-    }
+   
 }
