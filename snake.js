@@ -30,24 +30,25 @@ setSnake();
 setApple();
 
 function game() {
-    sHeadX += VelostityX;
-    sHeadY += VelostityY;
+    console.log(sHeadX, sHeadY + " / " + VelostityX, VelostityY);
+    sHeadY += VelostityX;
+    sHeadX += VelostityY;
 
     if (sHeadX < 0) {
         sHeadX = SIZE - 1;
-        GAMEOVER();
+        //GAMEOVER();
     }
     if (sHeadX > SIZE - 1) {
         sHeadX = 0;
-        GAMEOVER();
+        //GAMEOVER();
     }
     if (sHeadY < 0) {
         sHeadY = SIZE - 1;
-        GAMEOVER();
+        //GAMEOVER();
     }
     if (sHeadY > SIZE - 1) {
         sHeadY = 0;
-        GAMEOVER();
+        //GAMEOVER();
     }
 
     clearField();
@@ -81,7 +82,7 @@ function drawSnake() {
         matrix[snake[i].x][snake[i].y].classList.add("snakeCell");
 
         if (snake[i].x == sHeadX && snake[i].y == sHeadX) {
-            GAMEOVER();
+            //GAMEOVER();
         }
     }
 }
@@ -96,18 +97,18 @@ function GAMEOVER(){
 }
 
 function keyPush(evt) {
-    console.log(evt);
+    //console.log(evt);
     switch (evt.keyCode) {
-        case 37:
+        case 37: // top
             VelostityX = -1; VelostityY = 0;
             break;
-        case 38:
+        case 38: // left
             VelostityX = 0; VelostityY = -1;
             break;
-        case 39:
+        case 39: // down
             VelostityX = 1; VelostityY = 0;
             break;
-        case 40:
+        case 40: // right
             VelostityX = 0; VelostityY = 1;
             break;
     }
