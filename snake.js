@@ -1,6 +1,3 @@
-
-// https://pastebin.com/raw/Z3zhb7cY
-
 const table = document.getElementById("snakeDiv");
 const matrix = [];
 const SIZE = 20;
@@ -23,7 +20,7 @@ for (let i = 0; i < SIZE; i++) {
 
 window.onload = function () {
     document.addEventListener("keydown", keyPush);
-    gameInterval = setInterval(game, 1000 / 10);
+    gameInterval = setInterval(game, 1000 / 20);
 }
 
 setSnake();
@@ -82,8 +79,8 @@ function drawSnake() {
     for (var i = 0; i < snake.length; i++) {
         matrix[snake[i].x][snake[i].y].classList.add("snakeCell");
 
-        if (snake[i].x == sHeadX && snake[i].y == sHeadX) {
-            //GAMEOVER();
+        if (snake[i].x == sHeadX && snake[i].y == sHeadY) {
+            tail = 3;
         }
     }
 }
