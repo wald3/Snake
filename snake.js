@@ -52,9 +52,12 @@ function game() {
 
     clearField();
     drawSnake();
-    drawApple();
+    drawApple();        
 
     snake.push({x:sHeadX,y:sHeadY});
+    while(snake.length>tail) {
+        snake.shift();
+    }
     
 
     if(appleX == sHeadX && appleY == sHeadY) {
