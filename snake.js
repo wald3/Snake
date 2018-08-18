@@ -19,6 +19,7 @@ for (let i = 0; i < SIZE; i++) {
 }
 
 window.onload = function () {
+    VelostityY = 0, VelostityX = -1;
     setSnake();
     setApple();
     updateField();
@@ -28,16 +29,18 @@ window.onload = function () {
 function gameStart() {
     document.removeEventListener("keydown", keyStart);
     document.addEventListener("keydown", keyPush);
-    gameInterval = setInterval(game, 1000 / 10);
+    gameInterval = setInterval(game, 1000 / 3);
 }
 
 function game() {
-    console.log(VelostityX, VelostityY);
+
+    
     if (VelostityX === 0 && VelostityY === 0) {
+        // как то подругому блять а то пиздец
     }
-    else{
-        sHeadY += VelostityX;
-        sHeadX += VelostityY;
+    else {
+        sHeadY += VelostityY;
+        sHeadX += VelostityX;
 
         if (sHeadX < 0) {
             sHeadX = SIZE - 1;
@@ -57,13 +60,14 @@ function game() {
         }
 
         updateField();
-        
+
         snake.push({ x: sHeadX, y: sHeadY });
-       
+
         while (snake.length > tail) {
+            console.log(snake);
             snake.shift();
-       
-    }
+
+        }
 
 
         if (appleX == sHeadX && appleY == sHeadY) {
@@ -71,7 +75,7 @@ function game() {
             setApple();
         }
     }
-  
+
 
 }
 
@@ -113,16 +117,16 @@ function GAMEOVER() {
 function keyPush(evt) {
     switch (evt.keyCode) {
         case 37:
-            VelostityX = -1; VelostityY = 0;
+            VelostityY = -1; VelostityX = 0;
             break;
         case 38:
-            VelostityX = 0; VelostityY = -1;
+            VelostityY = 0; VelostityX = -1;
             break;
         case 39:
-            VelostityX = 1; VelostityY = 0;
+            VelostityY = 1; VelostityX = 0;
             break;
         case 40:
-            VelostityX = 0; VelostityY = 1;
+            VelostityY = 0; VelostityX = 1;
             break;
     }
 }
@@ -139,10 +143,10 @@ function setSnake() {
     sHeadX = getRandomInt(SIZE - 6) + 3;
     sHeadY = getRandomInt(SIZE - 6) + 3;
 
-
-    snake.push({ x: sHeadX, y: sHeadY });
-    snake.push({ x: sHeadX + 1, y: sHeadY });
     snake.push({ x: sHeadX + 2, y: sHeadY });
+    snake.push({ x: sHeadX + 1, y: sHeadY });
+    snake.push({ x: sHeadX, y: sHeadY });
+
     tail = 3;
 
 }
