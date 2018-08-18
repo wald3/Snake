@@ -19,56 +19,72 @@ for (let i = 0; i < SIZE; i++) {
 }
 
 window.onload = function () {
-    document.addEventListener("keydown", keyPush);
-    gameInterval = setInterval(game, 1000 / 20);
+    setSnake();
+    setApple();
+    updateField();
+    document.addEventListener("keydown", keyStart);
 }
 
-setSnake();
-setApple();
+function gameStart() {
+    document.removeEventListener("keydown", keyStart);
+    document.addEventListener("keydown", keyPush);
+    gameInterval = setInterval(game, 1000 / 10);
+}
 
 function game() {
-    console.log(sHeadX, sHeadY + " / " + VelostityX, VelostityY);
-    // matrix is inversed [x = y]
-    sHeadY += VelostityX;
-    sHeadX += VelostityY;
+    console.log(VelostityX, VelostityY);
+    if (VelostityX === 0 && VelostityY === 0) {
+    }
+    else{
+        sHeadY += VelostityX;
+        sHeadX += VelostityY;
 
-    if (sHeadX < 0) {
-        sHeadX = SIZE - 1;
-        //GAMEOVER();
-    }
-    if (sHeadX > SIZE - 1) {
-        sHeadX = 0;
-        //GAMEOVER();
-    }
-    if (sHeadY < 0) {
-        sHeadY = SIZE - 1;
-        //GAMEOVER();
-    }
-    if (sHeadY > SIZE - 1) {
-        sHeadY = 0;
-        //GAMEOVER();
+        if (sHeadX < 0) {
+            sHeadX = SIZE - 1;
+            //GAMEOVER();
+        }
+        if (sHeadX > SIZE - 1) {
+            sHeadX = 0;
+            //GAMEOVER();
+        }
+        if (sHeadY < 0) {
+            sHeadY = SIZE - 1;
+            //GAMEOVER();
+        }
+        if (sHeadY > SIZE - 1) {
+            sHeadY = 0;
+            //GAMEOVER();
+        }
+
+        updateField();
+        
+        snake.push({ x: sHeadX, y: sHeadY });
+       
+        while (snake.length > tail) {
+            snake.shift();
+       
     }
 
+
+        if (appleX == sHeadX && appleY == sHeadY) {
+            tail++;
+            setApple();
+        }
+    }
+  
+
+}
+
+function updateField() {
     clearField();
     drawSnake();
-    drawApple();        
-
-    snake.push({x:sHeadX,y:sHeadY});
-    while(snake.length>tail) {
-        snake.shift();
-    }
-    
-
-    if(appleX == sHeadX && appleY == sHeadY) {
-		tail++;
-		setApple();
-	}
+    drawApple();
 
 }
 
 function clearField() {
-    for(let i = 0; i < SIZE; i++){
-        for(let j= 0; j < SIZE; j++){
+    for (let i = 0; i < SIZE; i++) {
+        for (let j = 0; j < SIZE; j++) {
             matrix[i][j].classList.remove("cell", "appleCell", "snakeCell");
             matrix[i][j].classList.add("cell");
         }
@@ -85,30 +101,34 @@ function drawSnake() {
     }
 }
 
-function drawApple(){
+function drawApple() {
     matrix[appleX][appleY].classList.add("appleCell");
 }
 
-function GAMEOVER(){
-    console.log("gabella");
+function GAMEOVER() {
+    console.log("YOU LOSE");
     clearInterval(gameInterval);
 }
 
 function keyPush(evt) {
     switch (evt.keyCode) {
-        case 37: 
+        case 37:
             VelostityX = -1; VelostityY = 0;
             break;
-        case 38: 
+        case 38:
             VelostityX = 0; VelostityY = -1;
             break;
-        case 39: 
+        case 39:
             VelostityX = 1; VelostityY = 0;
             break;
-        case 40: 
+        case 40:
             VelostityX = 0; VelostityY = 1;
             break;
     }
+}
+
+function keyStart(evt) {
+    gameStart();
 }
 
 function getRandomInt(a) {
@@ -118,6 +138,11 @@ function getRandomInt(a) {
 function setSnake() {
     sHeadX = getRandomInt(SIZE - 6) + 3;
     sHeadY = getRandomInt(SIZE - 6) + 3;
+
+
+    snake.push({ x: sHeadX, y: sHeadY });
+    snake.push({ x: sHeadX + 1, y: sHeadY });
+    snake.push({ x: sHeadX + 2, y: sHeadY });
     tail = 3;
 
 }
@@ -126,5 +151,5 @@ function setApple() {
     appleX = getRandomInt(SIZE);
     appleY = getRandomInt(SIZE);
 
-   
+
 }
