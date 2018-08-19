@@ -99,25 +99,34 @@ function drawApple() {
 function GAMEOVER() {
     window.alert("YOU LOSE");
     clearInterval(gameInterval);
+    location.reload();
 }
 
 function keyPush(evt) {
     switch (evt.keyCode) {
         case 37:
-        if(VelostityY == 1 && VelostityX == 0){GAMEOVER();}
+        if(VelostityY == 1 && VelostityX == 0){}
+        else{
             VelostityY = -1; VelostityX = 0;
+        }         
             break;
         case 38:
-        if(VelostityY == 0 && VelostityX == 1){GAMEOVER();}
+        if(VelostityY == 0 && VelostityX == 1){}
+        else{
             VelostityY = 0; VelostityX = -1;
+        }           
             break;
         case 39:
-        if(VelostityY == -1 && VelostityX == 0){GAMEOVER();}
+        if(VelostityY == -1 && VelostityX == 0){}
+        else{
             VelostityY = 1; VelostityX = 0;
+        }           
             break;
         case 40:
-        if(VelostityY == 0 && VelostityX == -1){GAMEOVER();}
+        if(VelostityY == 0 && VelostityX == -1){}
+        else{
             VelostityY = 0; VelostityX = 1;
+        }   
             break;
     }
 }
