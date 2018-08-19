@@ -18,6 +18,7 @@ for (let i = 0; i < SIZE; i++) {
     }
 }
 
+
 window.onload = function () {
     VelostityY = 0, VelostityX = -1;
     setSnake();
@@ -29,61 +30,46 @@ window.onload = function () {
 function gameStart() {
     document.removeEventListener("keydown", keyStart);
     document.addEventListener("keydown", keyPush);
-    gameInterval = setInterval(game, 1000 / 3);
+    gameInterval = setInterval(game, 1000 / 16);
 }
 
 function game() {
-
-    
-    if (VelostityX === 0 && VelostityY === 0) {
-        // как то подругому блять а то пиздец
-    }
+    if (VelostityX === 0 && VelostityY === 0) {}
     else {
         sHeadY += VelostityY;
         sHeadX += VelostityX;
 
-        if (sHeadX < 0) {
-            sHeadX = SIZE - 1;
-            //GAMEOVER();
-        }
-        if (sHeadX > SIZE - 1) {
-            sHeadX = 0;
-            //GAMEOVER();
-        }
-        if (sHeadY < 0) {
-            sHeadY = SIZE - 1;
-            //GAMEOVER();
-        }
-        if (sHeadY > SIZE - 1) {
-            sHeadY = 0;
-            //GAMEOVER();
-        }
-
         updateField();
 
-        snake.push({ x: sHeadX, y: sHeadY });
-
-        while (snake.length > tail) {
-            console.log(snake);
-            snake.shift();
-
+        if (sHeadX < 0) {
+            GAMEOVER();
+        }
+        if (sHeadX > SIZE - 1) {
+            GAMEOVER();
+        }
+        if (sHeadY <  0) {
+            GAMEOVER();
+        }
+        if (sHeadY > SIZE - 1) {
+            GAMEOVER();
         }
 
+        snake.push({ x: sHeadX, y: sHeadY });
+        while (snake.length > tail) {
+            snake.shift();
+        }
 
         if (appleX == sHeadX && appleY == sHeadY) {
             tail++;
             setApple();
         }
     }
-
-
 }
 
 function updateField() {
     clearField();
     drawSnake();
     drawApple();
-
 }
 
 function clearField() {
@@ -98,9 +84,10 @@ function clearField() {
 function drawSnake() {
     for (var i = 0; i < snake.length; i++) {
         matrix[snake[i].x][snake[i].y].classList.add("snakeCell");
-
-        if (snake[i].x == sHeadX && snake[i].y == sHeadY) {
-            tail = 3;
+        if (snake[i].x === sHeadX && snake[i].y ===  sHeadY) {
+            if(snake.length > 5){
+                GAMEOVER();
+            }
         }
     }
 }
@@ -110,22 +97,26 @@ function drawApple() {
 }
 
 function GAMEOVER() {
-    console.log("YOU LOSE");
+    window.alert("YOU LOSE");
     clearInterval(gameInterval);
 }
 
 function keyPush(evt) {
     switch (evt.keyCode) {
         case 37:
+        if(VelostityY == 1 && VelostityX == 0){GAMEOVER();}
             VelostityY = -1; VelostityX = 0;
             break;
         case 38:
+        if(VelostityY == 0 && VelostityX == 1){GAMEOVER();}
             VelostityY = 0; VelostityX = -1;
             break;
         case 39:
+        if(VelostityY == -1 && VelostityX == 0){GAMEOVER();}
             VelostityY = 1; VelostityX = 0;
             break;
         case 40:
+        if(VelostityY == 0 && VelostityX == -1){GAMEOVER();}
             VelostityY = 0; VelostityX = 1;
             break;
     }
@@ -152,8 +143,13 @@ function setSnake() {
 }
 
 function setApple() {
-    appleX = getRandomInt(SIZE);
-    appleY = getRandomInt(SIZE);
+    appleX = getRandomInt(SIZE - 7) + 4;
+    appleY = getRandomInt(SIZE - 7) + 4;
 
+    for(let x = 0; x < snake.length; x++ ){
+        if(appleX == snake[x].x && appleY == snake[x].y){ 
+            setApple();
+        }
+    }
 
 }

@@ -23,23 +23,30 @@
     display: flex;
 }
 
+.center-div
+{
+    padding-top: 110px;
+     margin: 0 auto;
+     width: 600px; 
+}
+
 .cell {
-    width: 20px;
-    height: 20px;
-    margin: 1px;
-    background: rgb(195, 229, 231);
+    width: 30px;
+    height: 30px;
+    margin: 0px;
+    background:  rgb(255, 247, 185);
 }
 
 .snakeCell{
-    width: 20px;
-    height: 20px;
-    margin: 1px;
-    background: rgb(16, 170, 2);
+    width: 30px;
+    height: 30px;
+    margin: 0px;
+    background:  rgb(174, 228, 103);
 }
 
 .appleCell{
-    width: 20px;
-    height: 20px;
-    margin: 1px;
-    background: rgb(253, 2, 2);
+    width: 30px;
+    height: 30px;
+    margin: 0px;
+    background: rgb(233, 131, 63);
 }
