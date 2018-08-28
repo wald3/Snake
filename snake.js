@@ -30,16 +30,18 @@ window.onload = function () {
 function gameStart() {
     document.removeEventListener("keydown", keyStart);
     document.addEventListener("keydown", keyPush);
-    gameInterval = setInterval(game, 1000 / 16);
+    gameInterval = setInterval(game, 1000 / 5);
 }
 
 function game() {
     if (VelostityX === 0 && VelostityY === 0) {}
     else {
+        
         sHeadY += VelostityY;
         sHeadX += VelostityX;
 
         updateField();
+        
 
         if (sHeadX < 0) {
             GAMEOVER();
@@ -54,7 +56,7 @@ function game() {
             GAMEOVER();
         }
 
-        snake.push({ x: sHeadX, y: sHeadY });
+        snake.push({ x: sHeadX, y: sHeadY});
         while (snake.length > tail) {
             snake.shift();
         }
@@ -84,7 +86,7 @@ function clearField() {
 function drawSnake() {
     for (var i = 0; i < snake.length; i++) {
         matrix[snake[i].x][snake[i].y].classList.add("snakeCell");
-        if (snake[i].x === sHeadX && snake[i].y ===  sHeadY) {
+        if (snake[i].x  === sHeadX && snake[i].y ===  sHeadY) {
             if(snake.length > 5){
                 GAMEOVER();
             }
@@ -98,8 +100,9 @@ function drawApple() {
 
 function GAMEOVER() {
     window.alert("YOU LOSE");
+    snake.shift();
     clearInterval(gameInterval);
-    location.reload();
+    //location.reload();
 }
 
 function keyPush(evt) {
@@ -143,9 +146,9 @@ function setSnake() {
     sHeadX = getRandomInt(SIZE - 6) + 3;
     sHeadY = getRandomInt(SIZE - 6) + 3;
 
-    snake.push({ x: sHeadX + 2, y: sHeadY });
+    snake.push({ x: sHeadX  + 2, y: sHeadY });
     snake.push({ x: sHeadX + 1, y: sHeadY });
-    snake.push({ x: sHeadX, y: sHeadY });
+    snake.push({ x: sHeadX , y: sHeadY });
 
     tail = 3;
 

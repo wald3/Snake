@@ -33,20 +33,20 @@
 .cell {
     width: 30px;
     height: 30px;
-    margin: 0px;
+    margin: 1px;
     background:  rgb(255, 247, 185);
 }
 
 .snakeCell{
     width: 30px;
     height: 30px;
-    margin: 0px;
+    margin: 1px;
     background:  rgb(174, 228, 103);
 }
 
 .appleCell{
     width: 30px;
     height: 30px;
-    margin: 0px;
+    margin: 1px;
     background: rgb(233, 131, 63);
 }
