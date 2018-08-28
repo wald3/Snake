@@ -30,7 +30,7 @@ window.onload = function () {
 function gameStart() {
     document.removeEventListener("keydown", keyStart);
     document.addEventListener("keydown", keyPush);
-    gameInterval = setInterval(game, 1000 / 5);
+    gameInterval = setInterval(game, 1000 / 20);
 }
 
 function game() {
@@ -100,9 +100,8 @@ function drawApple() {
 
 function GAMEOVER() {
     window.alert("YOU LOSE");
-    snake.shift();
     clearInterval(gameInterval);
-    //location.reload();
+    location.reload();
 }
 
 function keyPush(evt) {
