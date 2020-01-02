@@ -2,10 +2,9 @@ const table = document.getElementById("snakeDiv");
 const label = document.getElementById("label");
 const matrix = [];
 const SIZE = 20;
-var testCount = 0;
 
 let snake = [], tail, gameInterval;
-let appleX, appleY, VelostityX = 0, VelostityY = 0, buffX=0, buffY=0, sHeadX, sHeadY;
+let appleX, appleY, sHeadX, sHeadY, VelostityX = 0, VelostityY = 0, buffX = 0, buffY = 0;
 
 for (let i = 0; i < SIZE; i++) {
     const row = table.appendChild(document.createElement("div"));
@@ -24,7 +23,6 @@ window.onload = function () {
     VelostityY = 0, VelostityX = -1;
     setSnake(5);
     setApple();
-
     drawSnake();
     drawApple();
     document.addEventListener("keydown", keyStart);
@@ -97,32 +95,21 @@ function keyPush(evt) {
     switch (evt.keyCode) {
         case 32: // Spacebar
         case 27: // Esc
+            // Swap between velosity and buff 
             VelostityY = [buffY, buffY = VelostityY][0];
             VelostityX = [buffX, buffX = VelostityX][0];
             break;
         case 37:
-        if(VelostityY == 1 && VelostityX == 0){}
-        else{
-            VelostityY = -1; VelostityX = 0;
-        }         
+            if(VelostityY != 1 && VelostityX != 0){ VelostityY = -1; VelostityX = 0; }       
             break;
         case 38:
-        if(VelostityY == 0 && VelostityX == 1){}
-        else{
-            VelostityY = 0; VelostityX = -1;
-        }           
+            if(VelostityY != 0 && VelostityX != 1){ VelostityY = 0; VelostityX = -1; }              
             break;
         case 39:
-        if(VelostityY == -1 && VelostityX == 0){}
-        else{
-            VelostityY = 1; VelostityX = 0;
-        }           
+            if(VelostityY != -1 && VelostityX != 0){ VelostityY = 1; VelostityX = 0; }             
             break;
         case 40:
-        if(VelostityY == 0 && VelostityX == -1){}
-        else{
-            VelostityY = 0; VelostityX = 1;
-        }   
+            if(VelostityY != 0 && VelostityX != -1){ VelostityY = 0; VelostityX = 1; }
             break;
     }
 }
@@ -158,7 +145,6 @@ function setSnake(_tail) {
         console.log(snake[snake.length - 1].x ,snake[snake.length - 1].y );
     }
 }
-
 
 function setApple() {
     let spots = [];
